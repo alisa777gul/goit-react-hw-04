@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [query, setQuery] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
   const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [images, setImages] = useState([]);
@@ -58,9 +57,8 @@ function App() {
     <div className="container">
       <Header onSubmit={handleSubmit} />
       <ImageGallery images={images} />
-      {hasMore && !loading && (
-        <LoadMore onLoad={handleLoad} hasMore={hasMore} />
-      )}
+      {hasMore && !loading && <LoadMore onLoad={handleLoad} />}
+      {loading && <div>Loading...</div>}
     </div>
   );
 }
