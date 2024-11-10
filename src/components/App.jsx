@@ -1,53 +1,66 @@
 import './App.css';
-import { useState } from 'react';
-import SearchBox from '../components/searchBox/SearchBox';
-import ContactList from '../components/contactList/ContactList';
-import ContactForm from '../components/contactForm/ContactForm';
+import Header from '../components/header/Header';
+import ImageGallery from '../components/imageGallery/ImageGallery';
+import LoadMore from '../components/LoadMore/LoadMore';
+import getPhotos from '../apiServices/photos';
+import { useState, useEffect } from 'react';
 
 function App() {
-  const exampleContacts = [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ];
+  const [query, setQuery] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState(null);
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const perPage = 30;
 
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem('contacts');
-    return savedContacts ? JSON.parse(savedContacts) : exampleContacts;
-  });
-  const [value, setValue] = useState('');
+  useEffect(() => {
+    if (!query) return;
 
-  const addContact = newContact => {
-    setContacts(prevContacts => {
-      const updatedContacts = [...prevContacts, newContact];
-      localStorage.setItem('contacts', JSON.stringify(updatedContacts));
-      return updatedContacts;
-    });
+    const fetchImages = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await getPhotos(query, page, perPage);
+        const { results, total } = data;
+
+        setImages(prevImages =>
+          page === 1 ? results : [...prevImages, ...results]
+        );
+
+        setHasMore(results.length > 0 && total > page * perPage);
+      } catch (error) {
+        setError('Ошибка при получении изображений');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, [page, query]);
+
+  const handleSubmit = value => {
+    setQuery(value);
+    setPage(1);
+    setImages([]);
+    setError(null);
+    setHasMore(true);
   };
 
-  const deleteTask = taskId => {
-    setContacts(prevContacts => {
-      const updatedContacts = prevContacts.filter(
-        contact => contact.id !== taskId
-      );
-      localStorage.setItem('contacts', JSON.stringify(updatedContacts));
-      return updatedContacts;
-    });
+  const handleLoad = () => {
+    if (!loading && hasMore) {
+      setPage(prevPage => prevPage + 1);
+    }
   };
-
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-  );
-
-  console.log(contacts);
 
   return (
     <div className="container">
-      <h1>Phonebook</h1>
-      <ContactForm onAdd={addContact} />
-      <SearchBox value={value} onFilter={setValue} />
-      <ContactList contacts={visibleContacts} onDelete={deleteTask} />
+      <Header onSubmit={handleSubmit} />
+      <ImageGallery images={images} />
+      {hasMore && !loading && (
+        <LoadMore onLoad={handleLoad} hasMore={hasMore} />
+      )}
     </div>
   );
 }

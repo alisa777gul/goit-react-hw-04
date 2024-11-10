@@ -54,27 +54,11 @@ button {
   transition: border-color 0.25s, background-color 0.25s;
   margin-right: 8px;
 }
-button:hover {
-  border-color: #000000;
-  background-color: #fdffea;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-input {
-  outline: white;
-}
-
-input:hover {
-  border: 2px solid #9f9fad;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #eaebc4;
+    background-color: #ffdafa;
   }
   a:hover {
     color: #213547;

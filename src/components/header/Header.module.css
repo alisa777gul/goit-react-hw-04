@@ -1,0 +1,42 @@
+.header {
+  background-color: rgb(250, 198, 234);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 72px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.input {
+  appearance: none;
+  border: none;
+  outline: none;
+
+  background: rgba(#e91e63, 0.2);
+  border-radius: 0.2em 0.2em 0 0;
+  padding: 0.4em;
+  color: #e91e63;
+  position: relative;
+}
+
+.input:hover {
+  border: 0 0 green 0;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  color: #e91e63;
+  height: 40px;
+  width: 40px;
+}
+
+.form {
+  background-color: white;
+  display: flex;
+  flex-direction: row-reverse;
+  border-bottom: 0.2em solid #e91e63;
+}
