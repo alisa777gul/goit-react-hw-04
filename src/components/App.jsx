@@ -3,6 +3,7 @@ import Header from '../components/header/Header';
 import ImageGallery from '../components/imageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
 import Loader from '../components/Loader/Loader';
+import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import getPhotos from '../apiServices/photos';
 import { useState, useEffect } from 'react';
 
@@ -28,9 +29,9 @@ function App() {
         setImages(prevImages => [...prevImages, ...results]);
 
         setIsVisible(page * perPage < total);
-        setIsEmpty(results.length === 0); // Устанавливаем isEmpty, если результатов нет
+        setIsEmpty(results.length === 0);
       } catch (error) {
-        setError('Something went wrong while fetching images.');
+        setError(true);
         setIsVisible(false);
       } finally {
         setLoading(false);
@@ -45,7 +46,7 @@ function App() {
     setPage(1);
     setImages([]);
     setError(null);
-    setIsEmpty(false); // Сбрасываем состояние, если начинается новый поиск
+    setIsEmpty(false);
     setIsVisible(false);
   };
 
@@ -57,12 +58,10 @@ function App() {
     <div className="container">
       <Header onSubmit={handleSubmit} />
 
-      {/* Показываем сообщение, если поиск не начинался */}
       {images.length === 0 && !loading && !query && (
         <div className="OOPS">Let’s begin search 🔎</div>
       )}
 
-      {/* Показываем сообщение, если изображения не найдены */}
       {isEmpty && query && !loading && (
         <div className="try">No images found. Try a different search.</div>
       )}
@@ -76,7 +75,7 @@ function App() {
           {isVisible && !loading && <LoadMore onLoad={handleLoad} />}
         </>
       ) : (
-        <div>{error && <div>{error}</div>}</div>
+        <>{error && <ErrorMessage />}</>
       )}
     </div>
   );
