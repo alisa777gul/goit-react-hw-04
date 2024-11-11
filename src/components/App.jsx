@@ -29,6 +29,7 @@ function App() {
         setIsVisible(page * perPage < total); // Ensure the button is visible only if more images are available
       } catch (error) {
         setError('Something went wrong while fetching images.');
+        setIsVisible(false);
       } finally {
         setLoading(false);
       }
@@ -53,13 +54,13 @@ function App() {
     <div className="container">
       <Header onSubmit={handleSubmit} />
 
-      {loading && !isVisible && <Loader />}
+      {loading && <Loader />}
 
       {images.length > 0 ? (
         <>
           <ImageGallery images={images} />
           {loading && <Loader />}
-          {isVisible && <LoadMore onLoad={handleLoad} />}
+          {isVisible && !loading && <LoadMore onLoad={handleLoad} />}
         </>
       ) : (
         <div>
