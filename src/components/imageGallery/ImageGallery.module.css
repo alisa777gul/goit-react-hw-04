@@ -14,7 +14,7 @@
   max-width: 200px;
   max-height: 150px;
   border: 2px solid #e91e63;
-  background-color: #fce4ec;
+  background-color: transparent;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px; /* Отступы внутри */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
