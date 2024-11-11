@@ -6,6 +6,7 @@ import Loader from '../components/Loader/Loader';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import getPhotos from '../apiServices/photos';
 import { useState, useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -57,17 +58,14 @@ function App() {
   return (
     <div className="container">
       <Header onSubmit={handleSubmit} />
-
+      <Toaster />
       {images.length === 0 && !loading && !query && (
         <div className="OOPS">Let’s begin search 🔎</div>
       )}
-
       {isEmpty && query && !loading && (
         <div className="try">No images found. Try a different search.</div>
       )}
-
       {page === 1 && loading && <Loader />}
-
       {images.length > 0 ? (
         <>
           <ImageGallery images={images} />
