@@ -12,23 +12,14 @@ body {
 
 .container {
   padding: 32px;
-  min-width: 320px;
-  width: 320px;
-}
-
-@media (min-width: 768px) {
-  .container {
-    min-width: 768px;
-  }
-}
-
-@media (min-width: 1168px) {
-  .container {
-    min-width: 1168px;
-  }
 }
 
 .OOPS {
-  margin-top: 100px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.try {
+  margin-top: 80px;
   text-align: center;
 }

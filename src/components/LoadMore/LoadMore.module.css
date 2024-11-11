@@ -1,3 +1,30 @@
-.btn {
+.btnDiv {
   text-align: center;
+}
+
+/* Стиль для кнопки */
+.btn {
+  margin-top: 20px;
+  background-color: #e91e63; /* Розовый фон */
+  color: white; /* Белый цвет текста */
+  padding: 10px 20px; /* Отступы внутри кнопки */
+  border: none; /* Убираем стандартную обводку */
+  border-radius: 8px; /* Сглаживаем углы */
+  font-size: 16px; /* Размер шрифта */
+  font-weight: bold; /* Жирный шрифт */
+  cursor: pointer; /* Курсор в виде руки при наведении */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Плавное изменение фона и эффекта при наведении */
+}
+
+.btn:hover {
+  background-color: #ff3385; /* Темнее розовый при наведении */
+  transform: scale(1.05); /* Немного увеличиваем кнопку при наведении */
+}
+
+.btn:focus {
+  outline: none; /* Убираем обводку при фокусе */
+}
+
+.btn:active {
+  background-color: #c9b1bd; /* Еще более темный розовый при нажатии */
 }
