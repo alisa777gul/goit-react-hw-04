@@ -4,7 +4,8 @@
 
 /* Стиль для кнопки */
 .btn {
-  margin-top: 20px;
+  margin: 0;
+
   background-color: #e91e63; /* Розовый фон */
   color: white; /* Белый цвет текста */
   padding: 10px 20px; /* Отступы внутри кнопки */
