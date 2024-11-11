@@ -9,12 +9,12 @@
 }
 
 .elem {
-  border-radius: 8px;
+  /* border-radius: 8px; */
   overflow: hidden;
   max-width: 200px;
   max-height: 150px;
   border: 2px solid #e91e63;
-  background-color: transparent;
+  background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px; /* Отступы внутри */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -27,7 +27,7 @@
 }
 
 .elem img {
-  border-radius: 8px;
+  /* border-radius: 8px; */
   min-height: 120px;
   max-height: 120px;
 }
