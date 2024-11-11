@@ -53,7 +53,7 @@ function App() {
   return (
     <div className="container">
       <Header onSubmit={handleSubmit} />
-
+      {images.length < 0 && <div className="OOPS">Let’s begin search 🔎</div>}
       {loading && <Loader />}
 
       {images.length > 0 ? (
@@ -64,9 +64,9 @@ function App() {
         </>
       ) : (
         <div>
-          {query
-            ? 'No images found. Try a different search.'
-            : 'Let’s begin search 🔎'}
+          {query &&
+            images.length < 0 &&
+            'No images found. Try a different search.'}
         </div>
       )}
 
