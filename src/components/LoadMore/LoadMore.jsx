@@ -1,6 +1,4 @@
-export default function LoadMore({ onLoad, hasMore }) {
-  if (!hasMore) return null;
-
+export default function LoadMore({ onLoad }) {
   return (
     <button type="button" onClick={onLoad}>
       Load More

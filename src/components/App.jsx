@@ -2,6 +2,7 @@ import './App.css';
 import Header from '../components/header/Header';
 import ImageGallery from '../components/imageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
+import Loader from '../components/Loader/Loader';
 import getPhotos from '../apiServices/photos';
 import { useState, useEffect } from 'react';
 
@@ -11,26 +12,23 @@ function App() {
   const [error, setError] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const perPage = 30;
+  const [isVisible, setIsVisible] = useState(false);
+  const [totalImages, setTotalImages] = useState(0);
+  const perPage = 10;
 
   useEffect(() => {
     if (!query) return;
 
     const fetchImages = async () => {
       setLoading(true);
-      setError(null);
+
       try {
-        const data = await getPhotos(query, page, perPage);
-        const { results, total } = data;
-
-        setImages(prevImages =>
-          page === 1 ? results : [...prevImages, ...results]
-        );
-
-        setHasMore(results.length > 0 && total > page * perPage);
+        const { results, total } = await getPhotos(query, page, perPage);
+        setImages(prevImages => [...prevImages, ...results]);
+        setTotalImages(total);
+        setIsVisible(page * perPage < total); // Ensure the button is visible only if more images are available
       } catch (error) {
-        setError('Ошибка при получении изображений');
+        setError('Something went wrong while fetching images.');
       } finally {
         setLoading(false);
       }
@@ -44,21 +42,34 @@ function App() {
     setPage(1);
     setImages([]);
     setError(null);
-    setHasMore(true);
+    setIsVisible(false);
   };
 
   const handleLoad = () => {
-    if (!loading && hasMore) {
-      setPage(prevPage => prevPage + 1);
-    }
+    setPage(prevPage => prevPage + 1);
   };
 
   return (
     <div className="container">
       <Header onSubmit={handleSubmit} />
-      <ImageGallery images={images} />
-      {hasMore && !loading && <LoadMore onLoad={handleLoad} />}
-      {loading && <div>Loading...</div>}
+
+      {loading && !isVisible && <Loader />}
+
+      {images.length > 0 ? (
+        <>
+          <ImageGallery images={images} />
+          {loading && <Loader />}
+          {isVisible && <LoadMore onLoad={handleLoad} />}
+        </>
+      ) : (
+        <div>
+          {query
+            ? 'No images found. Try a different search.'
+            : 'Let’s begin search 🔎'}
+        </div>
+      )}
+
+      {error && <div>{error}</div>}
     </div>
   );
 }

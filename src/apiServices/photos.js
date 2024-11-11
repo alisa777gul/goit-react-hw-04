@@ -5,7 +5,7 @@ axios.defaults.baseURL = 'https://api.unsplash.com/';
 axios.defaults.headers.common['Authorization'] = `Client-ID ${API_KEY}`;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
-const getPhotos = async (query, page, per_page) => {
+const getPhotos = async (query, page, perPage) => {
   try {
     console.log('Request Headers:', axios.defaults.headers.common);
     const { data } = await axios.get('search/photos', {
@@ -13,7 +13,7 @@ const getPhotos = async (query, page, per_page) => {
         query,
         page,
         orientation: 'landscape',
-        per_page,
+        per_page: perPage,
       },
     });
     console.log('API Response:', data);

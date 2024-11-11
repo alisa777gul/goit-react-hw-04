@@ -8,6 +8,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  box-shadow: 0px 0px 8px #e91e63;
 }
 
 .input {

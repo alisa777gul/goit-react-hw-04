@@ -30,8 +30,8 @@ input {
 
 body {
   color: black;
-  margin: 0;
-  display: flex;
+  margin: 0 auto;
+  text-align: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -55,25 +55,17 @@ button {
   margin-right: 8px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffdafa;
-  }
-  a:hover {
-    color: #213547;
-  }
-  button {
-    background-color: #f1ecec;
-  }
+:root {
+  color: #213547;
+  background-color: #ffdafa;
+}
+a:hover {
+  color: #213547;
+}
+button {
+  background-color: #f1ecec;
 }
 
 ul {
   list-style: none;
-}
-
-@media (max-width: 900px) {
-  body {
-    font-size: 14px;
-  }
 }
