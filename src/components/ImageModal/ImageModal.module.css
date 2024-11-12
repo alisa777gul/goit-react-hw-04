@@ -35,6 +35,10 @@
     width: 700px;
     height: 700px;
   }
+
+  img {
+    max-height: 480px;
+  }
 }
 
 .wrapper {
