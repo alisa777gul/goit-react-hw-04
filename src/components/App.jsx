@@ -7,15 +7,29 @@ import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import getPhotos from '../apiServices/photos';
 import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
+import ImageModal from './ImageModal/ImageModal';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 
 function App() {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
+  const [errord, setError] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const perPage = 10;
 
   useEffect(() => {
@@ -28,7 +42,6 @@ function App() {
         const { results, total } = await getPhotos(query, page, perPage);
 
         setImages(prevImages => [...prevImages, ...results]);
-
         setIsVisible(page * perPage < total);
         setIsEmpty(results.length === 0);
       } catch (error) {
@@ -41,6 +54,16 @@ function App() {
 
     fetchImages();
   }, [page, query]);
+
+  const openModal = image => {
+    setSelectedImage(image);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setSelectedImage(null);
+  };
 
   const handleSubmit = value => {
     setQuery(value);
@@ -68,14 +91,23 @@ function App() {
       {page === 1 && loading && <Loader />}
       {images.length > 0 ? (
         <>
-          <ImageGallery images={images} />
+          <ImageGallery images={images} openModal={openModal} />
           {loading && <Loader />}
           {isVisible && !loading && <LoadMore onLoad={handleLoad} />}
         </>
       ) : (
-        <>{error && <ErrorMessage />}</>
+        <>{errord && <ErrorMessage />}</>
+      )}
+      {selectedImage && (
+        <ImageModal
+          image={selectedImage}
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+        />
       )}
     </div>
   );
 }
+
 export default App;

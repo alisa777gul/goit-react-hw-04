@@ -1,0 +1,43 @@
+.list {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.modal {
+  width: 300px;
+
+  height: auto;
+  padding: 12px;
+}
+
+.modal img {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: 600px;
+    height: auto;
+    padding: 24px;
+  }
+
+  .list {
+    font-size: 20px;
+    margin-top: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    width: 700px;
+    height: 700px;
+  }
+}
+
+.wrapper {
+  z-index: 999;
+  position: relative;
+}
