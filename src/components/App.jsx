@@ -1,5 +1,5 @@
 import './App.css';
-import SearchBar from './SearchBar/SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 import ImageGallery from '../components/ImageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
 import Loader from '../components/Loader/Loader';
