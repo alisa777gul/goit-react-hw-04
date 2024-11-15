@@ -44,6 +44,7 @@ function App() {
         setImages(prevImages => [...prevImages, ...results]);
         setIsVisible(page * perPage < total);
         setIsEmpty(results.length === 0);
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         setError(true);
         setIsVisible(false);
