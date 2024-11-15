@@ -1,6 +1,6 @@
 import './App.css';
-import Header from '../components/header/Header';
-import ImageGallery from '../components/imageGallery/ImageGallery';
+import SearchBar from './SearchBar/SearchBar';
+import ImageGallery from './ImageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
 import Loader from '../components/Loader/Loader';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
@@ -80,10 +80,10 @@ function App() {
 
   return (
     <div className="container">
-      <Header onSubmit={handleSubmit} />
       <Toaster />
+      <SearchBar onSubmit={handleSubmit} />
       {images.length === 0 && !loading && !query && (
-        <div className="OOPS">Let’s begin search 🔎</div>
+        <div className="start">Let’s begin search 🔎</div>
       )}
       {isEmpty && query && !loading && (
         <div className="try">No images found. Try a different search.</div>

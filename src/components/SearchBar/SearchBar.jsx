@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { IoMdSearch } from 'react-icons/io';
-import style from './Header.module.css';
+import style from './SearchBar.module.css';
 import toast from 'react-hot-toast';
 
-export default function Header({ onSubmit }) {
+export default function SearchBar({ onSubmit }) {
   const [query, setQuery] = useState('');
 
   const handleChange = e => {
@@ -12,13 +12,13 @@ export default function Header({ onSubmit }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-
+    console.log('Submit handler triggered');
     if (!query.trim()) {
-      toast('Please enter a search query!', {
+      console.log('no entry');
+      return toast.error('Please enter a search query!', {
         duration: 4000,
-        position: 'top-center',
+        position: 'top-right',
       });
-      return;
     }
 
     onSubmit(query);
@@ -33,7 +33,6 @@ export default function Header({ onSubmit }) {
           type="text"
           autoComplete="off"
           placeholder="Search photos..."
-          required
           name="search"
           autoFocus
           value={query}
