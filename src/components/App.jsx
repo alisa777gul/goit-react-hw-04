@@ -1,6 +1,6 @@
 import './App.css';
 import SearchBar from './SearchBar/SearchBar';
-import ImageGallery from './ImageGallery/ImageGallery';
+import ImageGallery from '../components/ImageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
 import Loader from '../components/Loader/Loader';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
