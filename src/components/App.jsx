@@ -1,6 +1,6 @@
 import './App.css';
 import SearchBar from '../components/SearchBar/SearchBar';
-import ImageGallery from '../components/ImageGallery/ImageGallery';
+import ImageGallery from './imageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
 import Loader from '../components/Loader/Loader';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import ImageModal from './ImageModal/ImageModal';
 
+//o
 const customStyles = {
   content: {
     top: '50%',
